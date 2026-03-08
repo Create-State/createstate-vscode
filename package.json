@@ -1,0 +1,232 @@
+{
+  "name": "createstate",
+  "displayName": "Create State",
+  "description": "AI-powered knowledge graph for your codebase - capture context, search knowledge, and maintain continuity across sessions",
+  "version": "0.1.0",
+  "publisher": "CreateState",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "ai",
+    "knowledge graph",
+    "context",
+    "mcp",
+    "world model",
+    "copilot",
+    "session",
+    "continuity"
+  ],
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onStartupFinished",
+    "onChatParticipant:createstate.chat"
+  ],
+  "main": "./out/src/extension.js",
+  "icon": "images/icon.png",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "createstate.chat",
+        "fullName": "Create State",
+        "name": "createstate",
+        "description": "AI-powered knowledge graph - search decisions, capture context, manage sessions",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "search",
+            "description": "Search the knowledge graph"
+          },
+          {
+            "name": "restore",
+            "description": "Restore from latest session handoff"
+          },
+          {
+            "name": "handoff",
+            "description": "Create a session handoff"
+          },
+          {
+            "name": "synthesize",
+            "description": "Synthesize project context"
+          },
+          {
+            "name": "capture",
+            "description": "Capture context or decisions"
+          },
+          {
+            "name": "code",
+            "description": "Capture selected code"
+          },
+          {
+            "name": "context",
+            "description": "Get project world model"
+          },
+          {
+            "name": "models",
+            "description": "List your world models"
+          },
+          {
+            "name": "help",
+            "description": "Show available commands"
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "createstate.setApiKey",
+        "title": "Create State: Set API Key"
+      },
+      {
+        "command": "createstate.clearApiKey",
+        "title": "Create State: Clear API Key"
+      },
+      {
+        "command": "createstate.searchKnowledge",
+        "title": "Create State: Search Knowledge Graph"
+      },
+      {
+        "command": "createstate.quickRestore",
+        "title": "Create State: Quick Restore (Latest Handoff)"
+      },
+      {
+        "command": "createstate.startSession",
+        "title": "Create State: Restore from Handoff"
+      },
+      {
+        "command": "createstate.endSession",
+        "title": "Create State: Create Handoff"
+      },
+      {
+        "command": "createstate.synthesize",
+        "title": "Create State: Synthesize Project Context"
+      },
+      {
+        "command": "createstate.captureCode",
+        "title": "Create State: Capture Selected Code"
+      },
+      {
+        "command": "createstate.captureContext",
+        "title": "Create State: Capture Context"
+      },
+      {
+        "command": "createstate.getWorldModel",
+        "title": "Create State: Load World Model"
+      },
+      {
+        "command": "createstate.listModels",
+        "title": "Create State: List World Models"
+      },
+      {
+        "command": "createstate.showStatus",
+        "title": "Create State: Show Connection Status"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "createstate-sidebar",
+          "title": "Create State",
+          "icon": "$(database)"
+        }
+      ]
+    },
+    "views": {
+      "createstate-sidebar": [
+        {
+          "id": "createstate-status",
+          "name": "Status",
+          "type": "webview"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Create State",
+      "properties": {
+        "createstate.serverUrl": {
+          "type": "string",
+          "default": "https://createstate.ai",
+          "description": "Create State server URL"
+        },
+        "createstate.projectName": {
+          "type": "string",
+          "default": "",
+          "description": "Default project/world model name"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "createstate.searchKnowledge",
+        "key": "ctrl+shift+k",
+        "mac": "cmd+shift+k"
+      },
+      {
+        "command": "createstate.quickRestore",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r"
+      },
+      {
+        "command": "createstate.endSession",
+        "key": "ctrl+shift+h",
+        "mac": "cmd+shift+h"
+      },
+      {
+        "command": "createstate.synthesize",
+        "key": "ctrl+shift+y",
+        "mac": "cmd+shift+y"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "createstate.captureCode",
+          "when": "editorHasSelection",
+          "group": "createstate@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@types/jest": "^29.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Create-State/createstate-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Create-State/createstate-vscode/issues"
+  },
+  "homepage": "https://createstate.ai",
+  "license": "MIT"
+}
