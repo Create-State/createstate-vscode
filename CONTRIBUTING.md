@@ -128,7 +128,7 @@ Be respectful and constructive. We're all here to make development better.
 ## Questions?
 
 - Open an issue for bugs or features
-- Check [Create State docs](https://createstate.ai/docs) for API questions
+- Check [Create State documentation](https://createstate.ai/web/documentation) for API questions
 - Email support@createstate.ai for account issues
 
 ## License
